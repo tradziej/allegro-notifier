@@ -3,7 +3,13 @@
   "version": "0.0.1",
   "description": "Application scrapes auctions for given URL and notifies changes in every given time (minutes).",
   "main": "cli.js",
+  "scripts": {
+    "test": "jest"
+  },
   "repository": "https://github.com/tradziej/allegro-notifier",
   "author": "Tomasz Radziejewski",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
 }
