@@ -10,6 +10,10 @@ const Parser = require('./lib/parser');
 const handleAuctions = async (url, options) => {
   let auctions = [];
   verboseInfo(options.verbose, `Started observing: ${url}`);
+  verboseInfo(
+    options.verbose,
+    `Automatically refresh on every ${options.time} minute(s).`
+  );
 
   do {
     if (auctions.length == 0) {
@@ -19,8 +23,9 @@ const handleAuctions = async (url, options) => {
       verboseInfo(options.verbose, auctions);
     }
 
-    const sleepTime = 1000 * 60 * 15;
-    await sleep(sleepTime);
+    verboseInfo(options.verbose, `Sleeping for ${options.time} minute(s).`);
+    await sleep(options.time);
+    verboseInfo(options.verbose, `Waking up.`);
 
     const updatedAuctions = await Scraper.getHTML(url).then(html => {
       return Parser.getAllAuctions(html);
@@ -44,7 +49,8 @@ function comparer(otherAuctions) {
   }
 };
 
-const sleep = ms => {
+const sleep = (minutes = 15) => {
+  const ms = 1000 * 60 * minutes;
   return new Promise(resolve => {
     setTimeout(resolve, ms);
   });
@@ -79,7 +85,8 @@ program
   .version('0.0.1')
   .arguments('<url>')
   .description('Get notifications about new auctions')
-  .option('-v --verbose', 'Extended information')
+  .option('-t, --time <n>', 'Refresh time', parseInt)
+  .option('-v, --verbose', 'Extended information')
   .action(handleAuctions)
 
 program.parse(process.argv);

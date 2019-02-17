@@ -23,10 +23,10 @@ Usage
 $ allegro-notifier --help
 
   Usage
-    $ allegro-notifier <url> <minutes>
+    $ allegro-notifier <url>
 
   Example
-    $ allegro-notifier https://allegro.pl/kategoria/laptopy-apple-77915?order=n 10
+    $ allegro-notifier "https://allegro.pl/kategoria/laptopy-apple-77915?order=n" -t 10
 ```
 
 
