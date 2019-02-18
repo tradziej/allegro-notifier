@@ -1,8 +1,11 @@
 {
   "name": "allegro-notifier",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Application scrapes auctions for given URL and notifies changes in every given time (minutes).",
   "main": "index.js",
+  "bin": {
+    "allegro-notifier": "./bin/allegro-notifier"
+  },
   "scripts": {
     "test": "jest"
   },
