@@ -2,7 +2,7 @@
   "name": "allegro-notifier",
   "version": "0.0.1",
   "description": "Application scrapes auctions for given URL and notifies changes in every given time (minutes).",
-  "main": "cli.js",
+  "main": "index.js",
   "scripts": {
     "test": "jest"
   },

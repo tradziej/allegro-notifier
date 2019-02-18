@@ -4,8 +4,8 @@
 
 const program = require('commander');
 const notifier = require('node-notifier');
-const Scraper = require('../lib/scraper');
-const Parser = require('../lib/parser');
+
+const getAuctions = require('../index');
 
 const handleAuctions = async (url, options) => {
   let auctions = [];
@@ -17,9 +17,7 @@ const handleAuctions = async (url, options) => {
 
   do {
     if (auctions.length == 0) {
-      auctions = await Scraper.getHTML(url).then(html => {
-        return Parser.getAllAuctions(html);
-      });
+      auctions = await getAuctions(url);
       verboseInfo(options.verbose, auctions);
     }
 
@@ -27,9 +25,7 @@ const handleAuctions = async (url, options) => {
     await sleep(options.time);
     verboseInfo(options.verbose, `Waking up.`);
 
-    const updatedAuctions = await Scraper.getHTML(url).then(html => {
-      return Parser.getAllAuctions(html);
-    });
+    const updatedAuctions = await getAuctions(url);
     verboseInfo(options.verbose, updatedAuctions);
 
     const diff = updatedAuctions.filter(comparer(auctions));
