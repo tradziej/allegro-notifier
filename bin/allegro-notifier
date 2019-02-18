@@ -4,8 +4,8 @@
 
 const program = require('commander');
 const notifier = require('node-notifier');
-const Scraper = require('./lib/scraper');
-const Parser = require('./lib/parser');
+const Scraper = require('../lib/scraper');
+const Parser = require('../lib/parser');
 
 const handleAuctions = async (url, options) => {
   let auctions = [];
